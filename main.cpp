@@ -193,7 +193,7 @@ int main()
         // cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;                //Xuất file số liệu kết quả ra ý
     }
 
-    ofstream file_2;
+    ofstream file_2;                                        //ghi dữ liệu vào file.txt
     file_2.open("write-File.txt", ios::out);
 
     for (int i = 0; i < 120; i++)
