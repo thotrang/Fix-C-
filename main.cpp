@@ -1,5 +1,6 @@
 
 #include <bits/stdc++.h> //thư viện
+#include <fstream>
 using namespace std;
 
 class Obj // đối tượng    point       object
@@ -75,29 +76,30 @@ void swap(float &a, float &b)
 
 int main()
 {
-    int n = 4457;     // số lượng điểm ta có n=4457
-    float x, y, z;    // để nhận giá trị của x, ,y, z
-    Obj point[4500];  // mảng đẻ chứa các điểm    có vị trí từ 0 đến 4456
-    ofstream outfile; // đọc file
+    int n = 4457;    // số lượng điểm ta có n=4457
+    float x, y, z;   // để nhận giá trị của x, ,y, z
+    Obj point[4500]; // mảng đẻ chứa các điểm    có vị trí từ 0 đến 4456
     cout << setprecision(7);
-    freopen("slthu.txt", "r", stdin);
+    ifstream file;
+    file.open("slthu.txt");
 
     for (int i = 0; i < 4457; i++) // 83 đến 92 để đưa giá trị vào các điểm từ slthu.txt
     {
-        cin >> x >> y >> z; // đưa giá trị vào x,y,z trước
+        file >> x >> y >> z; // đưa giá trị vào x,y,z trước
 
         point[i].setX(x); //đưa giá trị từ x,y,z vào point
         point[i].setY(y);
         point[i].setZ(z);
     }
+    file.close();
     float arrx[4500] = {}; // cả đoạn này dùng để tìm min max
     float arry[4500] = {};
     float arrz[4500] = {};
 
-    freopen("slthu.txt", "r", stdin);
+    file.open("slthu.txt");
     for (int i = 0; i < 4457; i++)
-        cin >> arrx[i] >> arry[i] >> arrz[i];
-
+        file >> arrx[i] >> arry[i] >> arrz[i];
+    file.close();
     float minx = timMin(arrx, n), miny = timMin(arry, n); // tìm min của x và y
 
     float maxx = timMax(arrx, n), maxy = timMax(arry, n); // tìm max của x và y
@@ -176,19 +178,19 @@ int main()
         float y_1 = Z[iz][0].getY(), y_2 = Z[iz][1].getY(), y_3 = Z[iz][2].getY(), y_4 = Z[iz][3].getY();
         float z_1 = Z[iz][0].getZ(), z_2 = Z[iz][1].getZ(), z_3 = Z[iz][2].getZ(), z_4 = Z[iz][3].getZ();
 
-        float a_1=(x_i*(z_2-z_1)-z_2*x_1+z_1*x_2)/(x_2-x_1);
+        float a_1 = (x_i * (z_2 - z_1) - z_2 * x_1 + z_1 * x_2) / (x_2 - x_1);
 
-        float a_2=(y_i*(z_3-z_2)-z_3*y_2+z_2*y_3)/(y_3-y_2);
+        float a_2 = (y_i * (z_3 - z_2) - z_3 * y_2 + z_2 * y_3) / (y_3 - y_2);
 
-        float a_3=(x_i*(z_3-z_4)-z_3*x_4+z_4*x_3)/(x_3-x_4);
+        float a_3 = (x_i * (z_3 - z_4) - z_3 * x_4 + z_4 * x_3) / (x_3 - x_4);
 
-        float a_4=(y_i*(z_4-z_1)-z_4*y_1+z_1*y_4)/(y_4-y_1);
+        float a_4 = (y_i * (z_4 - z_1) - z_4 * y_1 + z_1 * y_4) / (y_4 - y_1);
 
         float a_5 = (a_1 + a_2 + a_3 + a_4) / 4;
 
         newPoint[iz].setZ(a_5);
 
-        cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;
+        cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;                //Xuất file số liệu kết quả ra ý
     }
 
     system("pause");
