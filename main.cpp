@@ -190,8 +190,18 @@ int main()
 
         newPoint[iz].setZ(a_5);
 
-        cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;                //Xuất file số liệu kết quả ra ý
+        // cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;                //Xuất file số liệu kết quả ra ý
     }
+
+    ofstream file_2;
+    file_2.open("write-File.txt", ios::out);
+
+    for (int i = 0; i < 120; i++)
+    {
+        file_2 << newPoint[i].getX() << "  " << newPoint[i].getY() << "  " << newPoint[i].getZ() << endl;
+    }
+
+    file_2.close();
 
     system("pause");
     return 0;
