@@ -79,7 +79,7 @@ int main()
     int n = 4457;    // số lượng điểm ta có n=4457
     float x, y, z;   // để nhận giá trị của x, ,y, z
     Obj point[4500]; // mảng đẻ chứa các điểm    có vị trí từ 0 đến 4456
-    cout << setprecision(7);
+    // cout << setprecision(7);
     ifstream file;
     file.open("slthu.txt");
 
@@ -107,25 +107,25 @@ int main()
     float newX[4500] = {}; // tạo ra bảng mới để chứa x và y mới
     float newY[4500] = {};
 
-    for (int i = 0; i < 120; i++)
+    for (int i = 0; i < 500; i++)
     {
         newX[i] = minx; //đưa giá trị mới vào x và y
-        minx += 0.00005;
+        minx += 0.00002;
         newY[i] = miny;
-        miny += 0.00007;
+        miny += 0.00003;
     }
 
-    Obj newPoint[150];
-    for (int i = 0; i < 120; i++)
+    Obj newPoint[600];
+    for (int i = 0; i < 500; i++)
     {
         newPoint[i].setX(newX[i]); // đưa giá trị của x và y vaò point mới
         newPoint[i].setY(newY[i]);
     }
 
-    Obj Z[200][4]; // tạo ra mảng 2 chiều để chứa 4 điểm gần nhất
+    Obj Z[600][4]; // tạo ra mảng 2 chiều để chứa 4 điểm gần nhất
 
     float KhoangCach[4500] = {};
-    for (int i = 0; i < 120; i++)
+    for (int i = 0; i < 500; i++)
     {
         for (int kc = 0; kc < 4457; kc++) // tính khoảng cách newpoint với point
         {
@@ -171,7 +171,7 @@ int main()
             }
         }
     }
-    for (int iz = 0; iz < 120; iz++) // tìm z
+    for (int iz = 0; iz < 500; iz++) // tìm z
     {
         float x_i = newPoint[iz].getX(), y_i = newPoint[iz].getY();
         float x_1 = Z[iz][0].getX(), x_2 = Z[iz][1].getX(), x_3 = Z[iz][2].getX(), x_4 = Z[iz][3].getX();
@@ -190,13 +190,13 @@ int main()
 
         newPoint[iz].setZ(a_5);
 
-        // cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;                //Xuất file số liệu kết quả ra ý
+        //  cout << newPoint[iz].getX() << " " << newPoint[iz].getY() << " " << newPoint[iz].getZ() << endl;                //Xuất file số liệu kết quả ra ý
     }
 
     ofstream file_2;                                        //ghi dữ liệu vào file.txt
     file_2.open("write-File.txt", ios::out);
-
-    for (int i = 0; i < 120; i++)
+    cout << setprecision(10);
+    for (int i = 0; i < 500; i++)
     {
         file_2 << newPoint[i].getX() << "  " << newPoint[i].getY() << "  " << newPoint[i].getZ() << endl;
     }
